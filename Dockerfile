@@ -15,17 +15,14 @@ RUN apk add --no-cache unzip \
     wget -q http://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-amd64.tar.gz  && \
     wget -q http://download.java.net/media/jai-imageio/builds/release/1.1/jai_imageio-1_1-lib-linux-amd64.tar.gz
 
+# unpack jai libraries and move to $JAVA_HOME folders
 RUN tar -xvzf jai-1_1_3-lib-linux-amd64.tar.gz && \
     tar -xvzf jai_imageio-1_1-lib-linux-amd64.tar.gz && \
     
     mv /tmp/jai-1_1_3/lib/*.jar $JAVA_HOME/lib/ext/ && \ 
     mv /tmp/jai-1_1_3/lib/*.so $JAVA_HOME/lib/amd64/ && \ 
     mv /tmp/jai_imageio-1_1/lib/*.jar $JAVA_HOME/lib/ext/ && \ 
-    mv /tmp/jai_imageio-1_1/lib/*.so $JAVA_HOME/lib/amd64/ && \ 
-    rm jai-1_1_3-lib-linux-amd64.tar.gz && \ 
-    rm -r /tmp/jai-1_1_3 && \ 
-    rm /tmp/jai_imageio-1_1-lib-linux-amd64.tar.gz && \ 
-    rm -r /tmp/jai_imageio-1_1
+    mv /tmp/jai_imageio-1_1/lib/*.so $JAVA_HOME/lib/amd64/ 
 
 WORKDIR $CATALINA_HOME
 
