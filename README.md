@@ -11,7 +11,7 @@ using jre8 and [Java Advanced Imaging](https://java.net/projects/jai) plugins
 Pull the image from Docker Hub using docker's pull command:
 
 ```shell
-docker pull hbarel/geoserver-alpine:<version number>
+docker pull hbarel/docker-geoserver:<version number>
 ```
 (replace <version number> with the relevent version)
 
@@ -26,7 +26,7 @@ docker build -t geoserver git://github.com/hbarel/docker-geoserver
 
 To run a container do:
 ```shell
-docker run --name "geoserver" -p 8080:8080 -d -t hbarel/geoserver-alpine:<version number>
+docker run --name "geoserver" -p 8080:8080 -d -t hbarel/docker-geoserver:<version number>
 ```
 
 Then, navigate to localhost:8080/geoserver/web
@@ -39,7 +39,7 @@ Docker volumes can be used to persist your data.
 
 ```shell
 mkdir -p ~/geoserver_data
-docker run -d -v $HOME/geoserver_data:/opt/geoserver/data_dir hbarel/geoserver-alpine:<version number>
+docker run -d -v $HOME/geoserver_data:/opt/geoserver/data_dir hbarel/docker-geoserver:<version number>
 ```
 
 You need to ensure the ``geoserver_data`` directory has sufficient permissions
@@ -51,7 +51,7 @@ the GeoServer application and pose a security risk.
 * this is an Alpha version. While this has been tested in a lab environment, it hasn't been
 tested in a production setup, so proceed with care.
 * As a principal rule, this image will never have a ```latest``` tag, so verify the version
-before pulling or building from this image. Check [Docker Hub](https://hub.docker.com/r/hbarel/geoserver-alpine/tags/)
+before pulling or building from this image. Check [Docker Hub](https://hub.docker.com/r/hbarel/docker-geoserver/tags/)
 for availble tags.
 
 ## TODO
