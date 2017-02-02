@@ -19,7 +19,7 @@ docker pull hbarel/docker-geoserver
 Build the image yourself:
 
 ```shell
-docker build -t geoserver git://github.com/hbarel/docker-geoserver
+docker build -t geoserver git://github.com/hagaibarel/docker-geoserver
 ```
 
 ### Run
