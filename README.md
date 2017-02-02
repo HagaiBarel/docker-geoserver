@@ -50,9 +50,6 @@ for the docker process to read / write it.
 the GeoServer application and pose a security risk.
 * this is an Alpha version. While this has been tested in a lab environment, it hasn't been
 tested in a production setup, so proceed with care.
-* As a principal rule, this image will never have a ```latest``` tag, so verify the version
-before pulling or building from this image. Check [Docker Hub](https://hub.docker.com/r/hbarel/docker-geoserver/tags/)
-for availble tags.
 
 ## TODO
 * Enable https on tomcat as an option when running a container
