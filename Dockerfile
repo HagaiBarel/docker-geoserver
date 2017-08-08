@@ -4,6 +4,10 @@ ENV GS_VERSION_MAJOR 2.11
 ENV GS_VERSION_PATCH 2
 ENV GEOSERVER_DATA_DIR /opt/geoserver/data_dir
 
+ENV INSTANCE_NAME geoserver-1
+ENV CLUSTER_CONFIG_DIR $GEOSERVER_DATA_DIR/cluster/$INSTANCE_NAME
+ENV JAVA_OPTS '-DCLUSTER_CONFIG_DIR=$CLUSTER_CONFIG_DIR -Dactivemq.base=$CLUSTER_CONFIG_DIR/tmp -Dactivemq.transportConnectors.server.uri=tcp://127.0.0.1:6545'
+
 RUN mkdir -p $GEOSERVER_DATA_DIR && \
     mkdir -p $CATALINA_HOME/webapps/geoserver
 
