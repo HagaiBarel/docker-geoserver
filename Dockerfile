@@ -4,10 +4,6 @@ ENV GS_VERSION_MAJOR 2.11
 ENV GS_VERSION_PATCH 2
 ENV GEOSERVER_DATA_DIR /opt/geoserver/data_dir
 
-ENV INSTANCE_NAME geoserver-1
-ENV CLUSTER_CONFIG_DIR $GEOSERVER_DATA_DIR/cluster/$INSTANCE_NAME
-ENV JAVA_OPTS '-DCLUSTER_CONFIG_DIR=$CLUSTER_CONFIG_DIR -Dactivemq.base=$CLUSTER_CONFIG_DIR/tmp -Dactivemq.transportConnectors.server.uri=tcp://127.0.0.1:9545'
-
 RUN mkdir -p $GEOSERVER_DATA_DIR && \
     mkdir -p $CATALINA_HOME/webapps/geoserver
 
@@ -35,10 +31,13 @@ RUN tar -xvzf jai-1_1_3-lib-linux-amd64.tar.gz && \
 
 WORKDIR $CATALINA_HOME
 
+COPY startup.sh ./startup.sh
+
 # unzip and move geoserver files to tomcat webapps folder
 RUN unzip /tmp/geoserver.zip -d /tmp && \
     unzip /tmp/geoserver.war -d $CATALINA_HOME/webapps/geoserver/ && \
-    unzip /tmp/geoserver-${GS_VERSION_MAJOR}-SNAPSHOT-jms-cluster-plugin.zip -d $CATALINA_HOME/webapps/geoserver/WEB-INF/lib/
+    unzip /tmp/geoserver-${GS_VERSION_MAJOR}-SNAPSHOT-jms-cluster-plugin.zip -d $CATALINA_HOME/webapps/geoserver/WEB-INF/lib/ && \
+    chmod +x ./startup.sh 
 
 #some cleanup of files and apk packages
 RUN rm -rf $CATALINA_HOME/webapps/ROOT && \
@@ -51,4 +50,4 @@ RUN rm -rf $CATALINA_HOME/webapps/ROOT && \
 
 EXPOSE 8080 9545
 
-CMD ["catalina.sh", "run"]
+CMD ["./startup.sh"]
