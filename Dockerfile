@@ -6,7 +6,7 @@ ENV GEOSERVER_DATA_DIR /opt/geoserver/data_dir
 
 ENV INSTANCE_NAME geoserver-1
 ENV CLUSTER_CONFIG_DIR $GEOSERVER_DATA_DIR/cluster/$INSTANCE_NAME
-ENV JAVA_OPTS '-DCLUSTER_CONFIG_DIR=$CLUSTER_CONFIG_DIR -Dactivemq.base=$CLUSTER_CONFIG_DIR/tmp -Dactivemq.transportConnectors.server.uri=tcp://127.0.0.1:6545'
+ENV JAVA_OPTS '-DCLUSTER_CONFIG_DIR=$CLUSTER_CONFIG_DIR -Dactivemq.base=$CLUSTER_CONFIG_DIR/tmp -Dactivemq.transportConnectors.server.uri=tcp://127.0.0.1:9545'
 
 RUN mkdir -p $GEOSERVER_DATA_DIR && \
     mkdir -p $CATALINA_HOME/webapps/geoserver
@@ -47,8 +47,8 @@ RUN rm -rf $CATALINA_HOME/webapps/ROOT && \
     rm -rf $CATALINA_HOME/webapps/host-manager && \
     rm -rf $CATALINA_HOME/webapps/manager && \
     rm -rf /tmp && \
-    apk del unzip openssl tar
+    apk del --no-cache unzip tar
 
-EXPOSE 8080
+EXPOSE 8080 9545
 
 CMD ["catalina.sh", "run"]
